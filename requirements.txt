@@ -1,0 +1,16 @@
+pandas
+easydict
+pyyaml
+cloudpathlib
+fiftyone
+numpy
+shapely
+tqdm
+imgaug
+umap-learn
+colorama
+torchvision
+torch
+opencv-python-headless
+python-dotenv
+ultralytics
