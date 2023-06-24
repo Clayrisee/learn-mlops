@@ -29,7 +29,7 @@ def run_jupyterlab():
     os.system(jupyter_cli_command)
 
 if __name__ == "__main__":
-    os.chdir("/workdir")
+    os.chdir(os.getcwd())
     task_1 = multiprocessing.Process(target=run_fiftyone)
     task_2 = multiprocessing.Process(target=run_jupyterlab)
     task_1.start()
