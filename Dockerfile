@@ -21,7 +21,9 @@ RUN apt install -yq curl \
 
 ENV PATH="${PATH}:/root/.local/bin"
 
-RUN pip install --user pip "jupyterlab>=3" "ipywidgets>=7.6,<8"
+# RUN pip install --user pip "jupyterlab>=3" "ipywidgets>=7.6,<8"
+
+RUN pip install --user "jupyterlab==3.6.1" ipympl "plotly==5.13.1"
 
 WORKDIR /app/
 COPY dataset-utils dataset-utils

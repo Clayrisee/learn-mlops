@@ -11,8 +11,8 @@
 	"runArgs": [
 		"--network=host",
 		"--ipc=host",
-		"--gpus",
-		"all"
+		// "--gpus",
+		// "all"
 
 	]
 
