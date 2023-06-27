@@ -23,8 +23,8 @@ ENV PATH="${PATH}:/root/.local/bin"
 
 # RUN pip install --user pip "jupyterlab>=3" "ipywidgets>=7.6,<8"
 
-RUN pip install --user "jupyterlab==3.6.1" ipympl "plotly==5.13.1"
-
+RUN pip install --user "jupyterlab==3.6.1" "ipywidgets<8,>=7.5" ipympl "plotly==5.13.1"
+RUN pip install --user "numpy<1.24.0" "dvc[gdrive]"
 WORKDIR /app/
 COPY dataset-utils dataset-utils
 COPY requirements.txt /app/requirements.txt
