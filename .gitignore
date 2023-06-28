@@ -1,0 +1,10 @@
+IVTXX17BBXX191024-01_Vehicle Detection Short Distance 5 & 17 Classes Dataset
+models/
+__pycache__
+/vehicle_dataset_new
+/vehicle_dataset
+/runs
+/wandb
+*.npy
+*.zip
+*.pt

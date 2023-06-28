@@ -1,0 +1,1 @@
+jupyter-lab --port 8008 --allow-root --ip 0.0.0.0 --LabApp.token=
