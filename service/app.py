@@ -8,6 +8,8 @@ import base64
 import uuid
 import os
 from constant import LabelMap
+from loguru import logger
+import json
 
 TEMPLATE_JSON = {
     "job": {
@@ -54,15 +56,19 @@ def predict():
     data = dict(request.json)
     id1 = uuid.uuid1().hex
     id2 = uuid.uuid1().hex
+    job_id = id1 + id2
     template_json = TEMPLATE_JSON
-    template_json["job"]["id"] = id1+id2
+    template_json["job"]["id"] = job_id
+    logger.info(f"Processing detection with job id : {job_id}")
     start_time = time.time()
     img = readb64(data["images"][0])
     final_results = model(img)
     template_json["job"]["result"]["result"] = final_results
     end_time = time.time()
-    print('inference time: {:3f}'.format(end_time - start_time))
-    return jsonify(template_json)
+    inference_time = '{:3f}'.format(end_time - start_time)
+    logger.info(f"Job {job_id} finished. Inference time {inference_time}")
+    logger.info(f"Results {template_json}")
+    return json.dumps(template_json)
         
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="8888")

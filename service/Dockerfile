@@ -25,7 +25,9 @@ COPY . .
 
 RUN pip install -r requirements.txt
 RUN pip install --user .
-RUN chmod +x model/download_model.sh && bash model/download_model.sh && mkdir model && mv best.onnx model/
+RUN pip install gdown
+RUN chmod +x model/download_model.sh && bash model/download_model.sh && mv best.onnx model/
+RUN pip install flask
 
 EXPOSE 8888
 ENV MODEL_PATH="model/best.onnx"

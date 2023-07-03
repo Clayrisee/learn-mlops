@@ -30,11 +30,14 @@ class YOLOv8:
         outputs = self.inference(input_tensor)
 
         self.boxes, self.scores, self.class_ids = self.process_output(outputs)
-        
-        for bbox, score, class_id in zip(self.boxes, self.scores, self.class_ids):
+        new_boxes = list()
+        for x1, y1, x2, y2 in self.boxes:
+            new_boxes.append([int(x1), int(y1), int(x2), int(y2)])
+            
+        for bbox, score, class_id in zip(new_boxes, self.scores, self.class_ids):
             output = {
                 "bbox": bbox,
-                "score": score,
+                "score": float("{:.4f}".format(score)),
                 "label": self.labels_dict[class_id]
             }
             final_outputs.append(output)
@@ -87,18 +90,13 @@ class YOLOv8:
     def extract_boxes(self, predictions):
         # Extract boxes from predictions
         boxes = predictions[:, :4]
-
-        # Scale boxes to original image dimensions
-        boxes = self.rescale_boxes(boxes)
-
         # Convert boxes to xyxy format
         boxes = xywh2xyxy(boxes)
-
+        boxes = self.rescale_boxes(boxes)
         return boxes
 
     def rescale_boxes(self, boxes):
-
-        # Rescale boxes to original image dimensions
+        # # Rescale boxes to original image dimensions
         input_shape = np.array([self.input_width, self.input_height, self.input_width, self.input_height])
         boxes = np.divide(boxes, input_shape, dtype=np.float32)
         boxes *= np.array([self.img_width, self.img_height, self.img_width, self.img_height])
