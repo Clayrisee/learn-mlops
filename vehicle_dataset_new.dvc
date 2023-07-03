@@ -1,0 +1,6 @@
+outs:
+- md5: 843f8f0f2c70c2c8a2000e533df5f108.dir
+  size: 2296665831
+  nfiles: 18449
+  hash: md5
+  path: vehicle_dataset_new
